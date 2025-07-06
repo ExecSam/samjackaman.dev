@@ -58,6 +58,7 @@ body::before {
 .screen {
     display: none;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .screen.active {
@@ -174,7 +175,6 @@ body::before {
 
 .typewriter {
     color: var(--text-primary);
-    position: relative;
     display: inline-block;
 }
 
@@ -182,8 +182,9 @@ body::before {
     animation: blink 1s infinite;
     font-weight: bold;
     color: var(--text-primary);
-    position: absolute;
-    top: 0;
+    margin-left: 2px;
+    z-index: 10;
+    position: relative;
 }
 
 @keyframes blink {
@@ -211,6 +212,7 @@ body::before {
     display: flex;
     min-height: 100vh;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .sidebar {
@@ -306,28 +308,20 @@ body::before {
     transform: translateX(5px);
 }
 
-/* Main Content - Fixed centering */
+/* Main Content - Properly centered */
 .main-content {
     margin-left: 300px;
     padding: 40px;
-    flex: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     width: calc(100% - 300px);
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 340px;
-    padding-right: 40px;
+    max-width: calc(100vw - 300px);
+    overflow-x: hidden;
 }
 
 .content-section {
     display: none;
     animation: slideIn 0.5s ease-out;
-    width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
 }
 
 .content-section.active {
@@ -700,8 +694,9 @@ body::before {
     }
     
     .main-content {
-        padding-left: 290px;
-        padding-right: 30px;
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        padding: 30px 20px;
     }
 }
 
@@ -720,10 +715,8 @@ body::before {
     
     .main-content {
         margin-left: 0;
-        padding: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
         width: 100%;
+        padding: 20px;
     }
     
     .terminal {
@@ -756,10 +749,6 @@ body::before {
         font-size: 14px;
     }
     
-    .typewriter {
-        min-width: 150px;
-    }
-    
     .main-content {
         padding: 15px;
     }
@@ -788,6 +777,14 @@ body::before {
     .menu-toggle {
         display: block;
     }
+}
+
+/* Hidden input for terminal */
+.hidden-input {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 /* Fade in animation for page load */

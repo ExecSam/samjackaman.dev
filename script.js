@@ -17,21 +17,6 @@ class TypewriterEffect {
         this.isDeleting = false;
         this.isComplete = false;
         this.cursor = document.querySelector('.cursor');
-        this.setupCursor();
-    }
-
-    setupCursor() {
-        // Create a temporary canvas to measure text width
-        this.canvas = document.createElement('canvas');
-        this.ctx = this.canvas.getContext('2d');
-        // Set font to match the terminal font
-        this.ctx.font = '16px "Source Code Pro", monospace';
-    }
-
-    updateCursorPosition() {
-        const currentText = this.element.textContent;
-        const textWidth = this.ctx.measureText(currentText).width;
-        this.cursor.style.left = textWidth + 'px';
     }
 
     type() {
@@ -43,7 +28,6 @@ class TypewriterEffect {
             // Deleting characters
             this.element.textContent = currentMessage.substring(0, this.charIndex - 1);
             this.charIndex--;
-            this.updateCursorPosition();
             
             if (this.charIndex === 0) {
                 this.isDeleting = false;
@@ -62,7 +46,6 @@ class TypewriterEffect {
             // Typing characters
             this.element.textContent = currentMessage.substring(0, this.charIndex + 1);
             this.charIndex++;
-            this.updateCursorPosition();
             
             if (this.charIndex === currentMessage.length) {
                 // If this is the last message, don't delete it
@@ -97,13 +80,12 @@ class TypewriterEffect {
         promptSection.style.cursor = 'text';
         commandsHint.style.display = 'block';
         
-        // Add input field (hidden but functional)
+        // Add input field (properly hidden but functional)
         const inputField = document.createElement('input');
         inputField.type = 'text';
         inputField.className = 'hidden-input';
-        inputField.style.position = 'absolute';
-        inputField.style.left = '-9999px';
-        inputField.style.opacity = '0';
+        inputField.setAttribute('autocomplete', 'off');
+        inputField.setAttribute('spellcheck', 'false');
         promptSection.appendChild(inputField);
         
         // Focus on input when clicking the prompt
@@ -111,10 +93,9 @@ class TypewriterEffect {
             inputField.focus();
         });
         
-        // Handle typing
+        // Handle typing - show text in typewriter element
         inputField.addEventListener('input', (e) => {
             this.element.textContent = e.target.value;
-            this.updateCursorPosition();
         });
         
         // Handle enter key
@@ -124,12 +105,15 @@ class TypewriterEffect {
                 this.handleCommand(command);
                 e.target.value = '';
                 this.element.textContent = '';
-                this.updateCursorPosition();
             }
         });
         
         // Auto-focus the input
-        setTimeout(() => inputField.focus(), 100);
+        setTimeout(() => {
+            inputField.focus();
+            // Show a cursor prompt
+            this.element.textContent = '';
+        }, 100);
     }
 
     handleCommand(command) {
@@ -137,19 +121,15 @@ class TypewriterEffect {
         
         if (command === 'help') {
             this.element.textContent = 'Available commands: help, enter, start';
-            this.updateCursorPosition();
             setTimeout(() => {
                 this.element.textContent = '';
-                this.updateCursorPosition();
             }, 3000);
         } else if (command === 'enter' || command === 'start' || command === '') {
             bootSequence.enterMainInterface();
         } else {
             this.element.textContent = `Command "${command}" not found. Type "help" for available commands.`;
-            this.updateCursorPosition();
             setTimeout(() => {
                 this.element.textContent = '';
-                this.updateCursorPosition();
             }, 3000);
         }
     }
@@ -166,6 +146,7 @@ class NavigationSystem {
         this.sections = document.querySelectorAll('.content-section');
         this.navLinks = document.querySelectorAll('.navigation a[data-section]');
         this.setupEventListeners();
+        this.updateActiveNavLink(document.querySelector('a[data-section="about"]'));
     }
 
     setupEventListeners() {
@@ -198,7 +179,9 @@ class NavigationSystem {
         this.navLinks.forEach(link => {
             link.classList.remove('active');
         });
-        activeLink.classList.add('active');
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
     }
 }
 
@@ -206,12 +189,18 @@ class NavigationSystem {
 class ContactForm {
     constructor() {
         this.form = document.getElementById('contact-form');
+        if (!this.form) {
+            console.log('Contact form not found');
+            return;
+        }
         this.submitBtn = this.form.querySelector('.submit-btn');
         this.statusDiv = document.getElementById('form-status');
         this.setupEventListeners();
     }
 
     setupEventListeners() {
+        if (!this.form) return;
+        
         this.form.addEventListener('submit', (e) => {
             e.preventDefault();
             this.handleFormSubmission();
@@ -274,6 +263,7 @@ class ContactForm {
     }
 
     showStatus(message, type) {
+        if (!this.statusDiv) return;
         this.statusDiv.textContent = message;
         this.statusDiv.className = `form-status ${type}`;
         this.statusDiv.style.display = 'block';
@@ -285,6 +275,7 @@ class ContactForm {
     }
 
     hideStatus() {
+        if (!this.statusDiv) return;
         this.statusDiv.style.display = 'none';
     }
 }
@@ -304,9 +295,11 @@ class BootSequence {
         }, 3000);
 
         // Make commands hint clickable
-        this.commandsHint.addEventListener('click', () => {
-            this.enterMainInterface();
-        });
+        if (this.commandsHint) {
+            this.commandsHint.addEventListener('click', () => {
+                this.enterMainInterface();
+            });
+        }
 
         // Listen for keyboard input (Enter or Space to skip)
         document.addEventListener('keydown', (e) => {
@@ -429,106 +422,6 @@ class ThemeController {
     }
 }
 
-// Glitch Effect Controller
-class GlitchEffect {
-    constructor() {
-        this.setupGlitchElements();
-    }
-
-    setupGlitchElements() {
-        // Add glitch effect to random elements occasionally
-        setInterval(() => {
-            this.triggerRandomGlitch();
-        }, 10000); // Every 10 seconds
-    }
-
-    triggerRandomGlitch() {
-        const glitchableElements = document.querySelectorAll('h2, .ascii-art, .terminal-title');
-        const randomElement = glitchableElements[Math.floor(Math.random() * glitchableElements.length)];
-        
-        if (randomElement && !randomElement.classList.contains('glitch')) {
-            randomElement.classList.add('glitch');
-            randomElement.setAttribute('data-text', randomElement.textContent);
-            
-            setTimeout(() => {
-                randomElement.classList.remove('glitch');
-                randomElement.removeAttribute('data-text');
-            }, 500);
-        }
-    }
-}
-
-// Matrix Rain Effect (Optional Enhancement)
-class MatrixRain {
-    constructor() {
-        this.canvas = null;
-        this.ctx = null;
-        this.drops = [];
-        this.chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-        this.fontSize = 10;
-        this.columns = 0;
-        this.isRunning = false;
-    }
-
-    init() {
-        // Create canvas for matrix effect
-        this.canvas = document.createElement('canvas');
-        this.canvas.style.position = 'fixed';
-        this.canvas.style.top = '0';
-        this.canvas.style.left = '0';
-        this.canvas.style.width = '100%';
-        this.canvas.style.height = '100%';
-        this.canvas.style.pointerEvents = 'none';
-        this.canvas.style.zIndex = '1';
-        this.canvas.style.opacity = '0.1';
-        document.body.appendChild(this.canvas);
-
-        this.ctx = this.canvas.getContext('2d');
-        this.resize();
-        
-        window.addEventListener('resize', () => this.resize());
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.columns = Math.floor(this.canvas.width / this.fontSize);
-        this.drops = Array(this.columns).fill(1);
-    }
-
-    draw() {
-        if (!this.isRunning) return;
-
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.fillStyle = '#00ff41';
-        this.ctx.font = `${this.fontSize}px monospace`;
-
-        for (let i = 0; i < this.drops.length; i++) {
-            const text = this.chars[Math.floor(Math.random() * this.chars.length)];
-            this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
-
-            if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
-                this.drops[i] = 0;
-            }
-            this.drops[i]++;
-        }
-
-        requestAnimationFrame(() => this.draw());
-    }
-
-    start() {
-        if (!this.canvas) this.init();
-        this.isRunning = true;
-        this.draw();
-    }
-
-    stop() {
-        this.isRunning = false;
-    }
-}
-
 // Application Initializer
 class App {
     constructor() {
@@ -537,18 +430,11 @@ class App {
         this.contactForm = new ContactForm();
         this.mobileMenu = new MobileMenu();
         this.themeController = new ThemeController();
-        this.glitchEffect = new GlitchEffect();
-        this.matrixRain = new MatrixRain();
     }
 
     init() {
         // Start boot sequence
         this.bootSequence.start();
-        
-        // Start subtle matrix rain effect
-        setTimeout(() => {
-            this.matrixRain.start();
-        }, 5000);
 
         // Add global keyboard shortcuts
         this.setupKeyboardShortcuts();
