@@ -118,14 +118,13 @@ class TypewriterEffect {
 
     handleCommand(command) {
         const bootSequence = new BootSequence();
-        
         if (command === 'help') {
             this.element.textContent = 'Available commands: help, enter, start';
-            setTimeout(() => {
-                this.element.textContent = '';
-            }, 3000);
+            // Do NOT clear the input or reset the prompt
+            return;
         } else if (command === 'enter' || command === 'start' || command === '') {
             bootSequence.enterMainInterface();
+            this.element.textContent = '';
         } else {
             this.element.textContent = `Command "${command}" not found. Type "help" for available commands.`;
             setTimeout(() => {
