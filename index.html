@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Jackaman - System Access</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div id="boot-screen" class="screen active">
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">SYSTEM TERMINAL v2.1.4</span>
+                <div class="terminal-controls">
+                    <span class="control minimize"></span>
+                    <span class="control maximize"></span>
+                    <span class="control close"></span>
+                </div>
+            </div>
+            <div class="terminal-body">
+                <div class="boot-sequence">
+                    <div class="boot-line">Initializing secure connection...</div>
+                    <div class="boot-line">Loading user profile...</div>
+                    <div class="boot-line">Establishing encrypted tunnel...</div>
+                    <div class="boot-line">Access granted. Welcome to the system.</div>
+                </div>
+                <div class="prompt-section">
+                    <div class="prompt">
+                        <span class="prompt-indicator">sam@system:~$</span>
+                        <span id="typewriter-text" class="typewriter"></span>
+                        <span class="cursor">_</span>
+                    </div>
+                </div>
+                <div class="commands-hint">
+                    <p>Type 'help' for available commands or click to enter</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Interface -->
+    <div id="main-interface" class="screen">
+        <div class="sidebar">
+            <div class="logo">
+                <pre class="ascii-art">
+ ____  _____ 
+/ ___||___ / 
+\___ \  |_ \ 
+ ___) |___) |
+|____/|____/ 
+                </pre>
+                <div class="status-bar">
+                    <span class="status-indicator online"></span>
+                    <span>SYSTEM ONLINE</span>
+                </div>
+            </div>
+            
+            <nav class="navigation">
+                <div class="nav-section">
+                    <h3>NAVIGATION</h3>
+                    <ul>
+                        <li><a href="#about" data-section="about">01. whoami</a></li>
+                        <li><a href="#skills" data-section="skills">02. ls -la skills/</a></li>
+                        <li><a href="#projects" data-section="projects">03. cat projects.log</a></li>
+                        <li><a href="#contact" data-section="contact">04. send_message</a></li>
+                        <li><a href="#info" data-section="info">05. contact_info</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>SYSTEM</h3>
+                    <ul>
+                        <li><a href="#" onclick="location.reload()">reboot</a></li>
+                        <li><a href="#" onclick="toggleTheme()">theme --switch</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <!-- About Section -->
+            <section id="about" class="content-section active">
+                <div class="section-header">
+                    <h2>$ whoami</h2>
+                    <div class="section-path">~/user/profile/about.txt</div>
+                </div>
+                <div class="content-body">
+                    <div class="file-content">
+                        <pre class="code-block">
+{
+  "name": "Sam Jackaman",
+  "role": "Full Stack Developer",
+  "location": "United Kingdom",
+  "status": "Available for opportunities",
+  "passion": [
+    "Clean code architecture",
+    "Problem solving",
+    "Continuous learning",
+    "Building innovative solutions"
+  ],
+  "philosophy": "Code is poetry. Every line should have purpose.",
+  "current_focus": "Building scalable applications with modern technologies"
+}
+                        </pre>
+                        <div class="text-content">
+                            <p>Welcome to my digital workspace. I'm a passionate developer who believes in the power of elegant code and innovative solutions.</p>
+                            <p>When I'm not crafting code, you'll find me exploring new technologies, contributing to open source projects, or diving deep into system architecture challenges.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="content-section">
+                <div class="section-header">
+                    <h2>$ ls -la skills/</h2>
+                    <div class="section-path">~/user/skills/</div>
+                </div>
+                <div class="content-body">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Frontend/</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span class="skill-name">JavaScript</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">React</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">TypeScript</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">CSS/SCSS</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>Backend/</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span class="skill-name">Node.js</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">Python</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">PostgreSQL</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">MongoDB</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>DevOps/</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span class="skill-name">Docker</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">AWS</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">Git</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">Linux</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section">
+                <div class="section-header">
+                    <h2>$ cat projects.log</h2>
+                    <div class="section-path">~/user/projects/recent.log</div>
+                </div>
+                <div class="content-body">
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3>Portfolio Terminal</h3>
+                                <span class="project-status">active</span>
+                            </div>
+                            <p>Interactive terminal-based portfolio website with typewriter effects</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">HTML5</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3>E-Commerce Platform</h3>
+                                <span class="project-status">completed</span>
+                            </div>
+                            <p>Full-stack e-commerce solution with payment integration</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3>API Gateway</h3>
+                                <span class="project-status">development</span>
+                            </div>
+                            <p>Microservices API gateway with rate limiting and authentication</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Redis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Form Section -->
+            <section id="contact" class="content-section">
+                <div class="section-header">
+                    <h2>$ send_message</h2>
+                    <div class="section-path">~/user/contact/message_form.sh</div>
+                </div>
+                <div class="content-body">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">sender_name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">sender_email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">message_subject:</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">message_body:</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">./send_message.sh</span>
+                            <span class="btn-loading">Transmitting...</span>
+                        </button>
+                    </form>
+                    
+                    <div class="form-status" id="form-status"></div>
+                </div>
+            </section>
+
+            <!-- Contact Info Section -->
+            <section id="info" class="content-section">
+                <div class="section-header">
+                    <h2>$ contact_info</h2>
+                    <div class="section-path">~/user/contact/info.json</div>
+                </div>
+                <div class="content-body">
+                    <div class="contact-info">
+                        <pre class="code-block">
+{
+  "contact": {
+    "email": "sam@jackaman.dev",
+    "linkedin": "linkedin.com/in/samjackaman",
+    "github": "github.com/samjackaman",
+    "location": "United Kingdom",
+    "timezone": "GMT/BST",
+    "availability": "Open to opportunities",
+    "response_time": "< 24 hours",
+    "preferred_contact": "email"
+  },
+  "social": {
+    "twitter": "@samjackaman",
+    "discord": "sam#1234"
+  },
+  "encryption": {
+    "pgp_key": "available_on_request",
+    "secure_messaging": "signal_available"
+  }
+}
+                        </pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
