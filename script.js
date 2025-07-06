@@ -17,6 +17,21 @@ class TypewriterEffect {
         this.isDeleting = false;
         this.isComplete = false;
         this.cursor = document.querySelector('.cursor');
+        this.setupCursor();
+    }
+
+    setupCursor() {
+        // Create a temporary canvas to measure text width
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        // Set font to match the terminal font
+        this.ctx.font = '16px "Source Code Pro", monospace';
+    }
+
+    updateCursorPosition() {
+        const currentText = this.element.textContent;
+        const textWidth = this.ctx.measureText(currentText).width;
+        this.cursor.style.left = textWidth + 'px';
     }
 
     type() {
@@ -28,6 +43,7 @@ class TypewriterEffect {
             // Deleting characters
             this.element.textContent = currentMessage.substring(0, this.charIndex - 1);
             this.charIndex--;
+            this.updateCursorPosition();
             
             if (this.charIndex === 0) {
                 this.isDeleting = false;
@@ -46,6 +62,7 @@ class TypewriterEffect {
             // Typing characters
             this.element.textContent = currentMessage.substring(0, this.charIndex + 1);
             this.charIndex++;
+            this.updateCursorPosition();
             
             if (this.charIndex === currentMessage.length) {
                 // If this is the last message, don't delete it
@@ -97,6 +114,7 @@ class TypewriterEffect {
         // Handle typing
         inputField.addEventListener('input', (e) => {
             this.element.textContent = e.target.value;
+            this.updateCursorPosition();
         });
         
         // Handle enter key
@@ -106,6 +124,7 @@ class TypewriterEffect {
                 this.handleCommand(command);
                 e.target.value = '';
                 this.element.textContent = '';
+                this.updateCursorPosition();
             }
         });
         
@@ -118,15 +137,19 @@ class TypewriterEffect {
         
         if (command === 'help') {
             this.element.textContent = 'Available commands: help, enter, start';
+            this.updateCursorPosition();
             setTimeout(() => {
                 this.element.textContent = '';
+                this.updateCursorPosition();
             }, 3000);
         } else if (command === 'enter' || command === 'start' || command === '') {
             bootSequence.enterMainInterface();
         } else {
             this.element.textContent = `Command "${command}" not found. Type "help" for available commands.`;
+            this.updateCursorPosition();
             setTimeout(() => {
                 this.element.textContent = '';
+                this.updateCursorPosition();
             }, 3000);
         }
     }
