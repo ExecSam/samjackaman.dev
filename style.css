@@ -7,13 +7,13 @@
 
 :root {
     --primary-green: #00ff41;
-    --secondary-green: #00aa2b;
+    --secondary-green: #00cc33;
     --dark-green: #001a00;
     --bg-black: #000000;
     --bg-dark: #0a0a0a;
     --text-primary: #00ff41;
-    --text-secondary: #00aa2b;
-    --text-dim: #006600;
+    --text-secondary: #66ff66;
+    --text-dim: #339933;
     --border-color: #00ff41;
     --glow-color: #00ff41;
     --font-mono: 'Source Code Pro', monospace;
@@ -22,7 +22,7 @@
 body {
     font-family: var(--font-mono);
     background: var(--bg-black);
-    color: var(--text-primary);
+    color: var(--text-secondary);
     overflow-x: hidden;
     min-height: 100vh;
     background-image: 
@@ -30,12 +30,12 @@ body {
             0deg,
             transparent,
             transparent 1px,
-            rgba(0, 255, 65, 0.03) 1px,
-            rgba(0, 255, 65, 0.03) 2px
+            rgba(0, 255, 65, 0.02) 1px,
+            rgba(0, 255, 65, 0.02) 2px
         );
 }
 
-/* Scanlines Effect */
+/* Scanlines Effect - Reduced intensity */
 body::before {
     content: '';
     position: fixed;
@@ -47,8 +47,8 @@ body::before {
         90deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 65, 0.02) 2px,
-        rgba(0, 255, 65, 0.02) 4px
+        rgba(0, 255, 65, 0.01) 2px,
+        rgba(0, 255, 65, 0.01) 4px
     );
     pointer-events: none;
     z-index: 1000;
@@ -76,12 +76,12 @@ body::before {
 .terminal {
     width: 90%;
     max-width: 800px;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     border: 2px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 
-        0 0 20px rgba(0, 255, 65, 0.3),
-        inset 0 0 20px rgba(0, 255, 65, 0.1);
+        0 0 20px rgba(0, 255, 65, 0.2),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
     overflow: hidden;
 }
 
@@ -139,6 +139,7 @@ body::before {
     animation: bootLine 0.5s ease-in forwards;
     margin-bottom: 5px;
     font-size: 14px;
+    color: var(--text-secondary);
 }
 
 .boot-line:nth-child(1) { animation-delay: 0.5s; }
@@ -165,7 +166,7 @@ body::before {
 }
 
 .prompt-indicator {
-    color: var(--text-secondary);
+    color: var(--text-dim);
     margin-right: 10px;
 }
 
@@ -178,6 +179,7 @@ body::before {
     animation: blink 1s infinite;
     font-weight: bold;
     margin-left: 2px;
+    color: var(--text-primary);
 }
 
 @keyframes blink {
@@ -208,7 +210,7 @@ body::before {
 
 .sidebar {
     width: 300px;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.98);
     border-right: 1px solid var(--border-color);
     padding: 20px;
     position: fixed;
@@ -263,7 +265,7 @@ body::before {
 }
 
 .nav-section h3 {
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 12px;
     margin-bottom: 15px;
     letter-spacing: 1px;
@@ -280,7 +282,7 @@ body::before {
 }
 
 .nav-section a {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 14px;
     padding: 8px 12px;
@@ -294,6 +296,7 @@ body::before {
 .nav-section a.active {
     background: rgba(0, 255, 65, 0.1);
     border-color: var(--border-color);
+    color: var(--text-primary);
     text-shadow: 0 0 5px var(--glow-color);
     transform: translateX(5px);
 }
@@ -350,14 +353,14 @@ body::before {
 
 /* Code Blocks */
 .code-block {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 20px;
     margin: 20px 0;
     font-family: var(--font-mono);
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     overflow-x: auto;
     box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
@@ -370,6 +373,7 @@ body::before {
     margin-bottom: 15px;
     color: var(--text-secondary);
     font-size: 16px;
+    line-height: 1.7;
 }
 
 /* Skills Section */
@@ -411,7 +415,7 @@ body::before {
     background: linear-gradient(90deg, var(--secondary-green), var(--text-primary));
     border-radius: 3px;
     animation: fillBar 1.5s ease-out;
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
 @keyframes fillBar {
@@ -426,7 +430,7 @@ body::before {
 }
 
 .project-item {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 25px;
@@ -435,7 +439,7 @@ body::before {
 
 .project-item:hover {
     border-color: var(--text-primary);
-    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.1);
     transform: translateY(-2px);
 }
 
@@ -468,10 +472,14 @@ body::before {
     background: #ff6b00;
 }
 
+.project-status.active {
+    background: var(--text-primary);
+}
+
 .project-item p {
     color: var(--text-secondary);
     margin-bottom: 15px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .project-tech {
@@ -490,6 +498,16 @@ body::before {
 }
 
 /* Contact Form */
+.contact-intro {
+    margin-bottom: 30px;
+}
+
+.contact-intro p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
 .contact-form {
     max-width: 600px;
     margin-top: 20px;
@@ -510,22 +528,28 @@ body::before {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     border: 1px solid var(--text-dim);
     border-radius: 4px;
     padding: 12px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
     font-size: 14px;
     transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-dim);
+    opacity: 0.7;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--text-primary);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-    text-shadow: 0 0 5px var(--glow-color);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    background: rgba(0, 0, 0, 0.9);
 }
 
 .form-group textarea {
@@ -549,7 +573,7 @@ body::before {
 
 .submit-btn:hover {
     background: rgba(0, 255, 65, 0.1);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
     text-shadow: 0 0 5px var(--glow-color);
 }
 
@@ -582,12 +606,74 @@ body::before {
 .form-status.error {
     background: rgba(255, 0, 0, 0.1);
     border: 1px solid #ff0000;
-    color: #ff0000;
+    color: #ff6666;
 }
 
 /* Contact Info */
 .contact-info {
     margin-top: 20px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--text-dim);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+}
+
+.contact-item h3 {
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.contact-item p {
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.contact-item a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-item a:hover {
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.additional-info {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--text-dim);
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.additional-info h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.additional-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 16px;
 }
 
 /* Responsive Design */
@@ -634,6 +720,11 @@ body::before {
         align-items: flex-start;
         gap: 10px;
     }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -676,60 +767,6 @@ body::before {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-    }
-}
-
-/* Glitch Effect for Special Elements */
-.glitch {
-    position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch::before {
-    animation: glitch-1 0.5s infinite;
-    color: #ff0000;
-    z-index: -1;
-}
-
-.glitch::after {
-    animation: glitch-2 0.5s infinite;
-    color: #0000ff;
-    z-index: -2;
-}
-
-@keyframes glitch-1 {
-    0%, 14%, 15%, 49%, 50%, 99%, 100% {
-        transform: translate(0px, 0px);
-    }
-    1%, 13% {
-        transform: translate(-1px, 0px);
-    }
-    16%, 48% {
-        transform: translate(1px, 0px);
-    }
-}
-
-@keyframes glitch-2 {
-    0%, 19%, 20%, 39%, 40%, 79%, 80%, 100% {
-        transform: translate(0px, 0px);
-    }
-    1%, 18% {
-        transform: translate(1px, 0px);
-    }
-    21%, 38% {
-        transform: translate(-1px, 0px);
-    }
-    41%, 78% {
-        transform: translate(0px, 1px);
     }
 }
 

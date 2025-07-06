@@ -1,12 +1,10 @@
 // Typewriter Effect Configuration
 const typewriterMessages = [
-    "Accessing secure systems...",
-    "Decrypting user profiles...",
-    "Scanning for vulnerabilities...",
-    "System compromised successfully.",
+    "Connecting to backend services...",
+    "Successfully connected to samjackaman.dev",
     "Welcome to my digital domain.",
-    "Ready to explore the matrix?",
-    "Type 'help' for available commands..."
+    "Ready to explore?",
+    "Type \"help\" for available commands..."
 ];
 
 class TypewriterEffect {
@@ -17,10 +15,13 @@ class TypewriterEffect {
         this.messageIndex = 0;
         this.charIndex = 0;
         this.isDeleting = false;
-        this.isWaiting = false;
+        this.isComplete = false;
+        this.cursor = document.querySelector('.cursor');
     }
 
     type() {
+        if (this.isComplete) return;
+
         const currentMessage = this.messages[this.messageIndex];
         
         if (this.isDeleting) {
@@ -30,8 +31,15 @@ class TypewriterEffect {
             
             if (this.charIndex === 0) {
                 this.isDeleting = false;
-                this.messageIndex = (this.messageIndex + 1) % this.messages.length;
-                setTimeout(() => this.type(), 500); // Pause before typing next message
+                this.messageIndex++;
+                
+                // Check if we've completed all messages
+                if (this.messageIndex >= this.messages.length) {
+                    this.complete();
+                    return;
+                }
+                
+                setTimeout(() => this.type(), 500);
                 return;
             }
         } else {
@@ -40,18 +48,87 @@ class TypewriterEffect {
             this.charIndex++;
             
             if (this.charIndex === currentMessage.length) {
-                this.isWaiting = true;
+                // If this is the last message, don't delete it
+                if (this.messageIndex === this.messages.length - 1) {
+                    this.complete();
+                    return;
+                }
+                
                 setTimeout(() => {
                     this.isDeleting = true;
-                    this.isWaiting = false;
                     this.type();
-                }, 2000); // Wait before starting to delete
+                }, 2000);
                 return;
             }
         }
         
         const typingSpeed = this.isDeleting ? this.speed / 2 : this.speed;
         setTimeout(() => this.type(), typingSpeed + Math.random() * 50);
+    }
+
+    complete() {
+        this.isComplete = true;
+        // Enable user input
+        this.enableUserInput();
+    }
+
+    enableUserInput() {
+        const promptSection = document.querySelector('.prompt-section');
+        const commandsHint = document.querySelector('.commands-hint');
+        
+        // Make the prompt interactive
+        promptSection.style.cursor = 'text';
+        commandsHint.style.display = 'block';
+        
+        // Add input field (hidden but functional)
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.className = 'hidden-input';
+        inputField.style.position = 'absolute';
+        inputField.style.left = '-9999px';
+        inputField.style.opacity = '0';
+        promptSection.appendChild(inputField);
+        
+        // Focus on input when clicking the prompt
+        promptSection.addEventListener('click', () => {
+            inputField.focus();
+        });
+        
+        // Handle typing
+        inputField.addEventListener('input', (e) => {
+            this.element.textContent = e.target.value;
+        });
+        
+        // Handle enter key
+        inputField.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = e.target.value.toLowerCase().trim();
+                this.handleCommand(command);
+                e.target.value = '';
+                this.element.textContent = '';
+            }
+        });
+        
+        // Auto-focus the input
+        setTimeout(() => inputField.focus(), 100);
+    }
+
+    handleCommand(command) {
+        const bootSequence = new BootSequence();
+        
+        if (command === 'help') {
+            this.element.textContent = 'Available commands: help, enter, start';
+            setTimeout(() => {
+                this.element.textContent = '';
+            }, 3000);
+        } else if (command === 'enter' || command === 'start' || command === '') {
+            bootSequence.enterMainInterface();
+        } else {
+            this.element.textContent = `Command "${command}" not found. Type "help" for available commands.`;
+            setTimeout(() => {
+                this.element.textContent = '';
+            }, 3000);
+        }
     }
 
     start() {
@@ -131,12 +208,12 @@ class ContactForm {
             await this.simulateFormSubmission(data);
             
             // Show success message
-            this.showStatus('Message transmitted successfully! I\'ll respond within 24 hours.', 'success');
+            this.showStatus('Message sent successfully! I\'ll respond within 24 hours.', 'success');
             this.form.reset();
             
         } catch (error) {
             // Show error message
-            this.showStatus('Transmission failed. Please try again or contact directly.', 'error');
+            this.showStatus('Failed to send message. Please try again or contact me directly.', 'error');
         } finally {
             // Remove loading state
             this.submitBtn.classList.remove('loading');
@@ -208,14 +285,7 @@ class BootSequence {
             this.enterMainInterface();
         });
 
-        // Auto-enter main interface after extended period
-        setTimeout(() => {
-            if (this.bootScreen.classList.contains('active')) {
-                this.enterMainInterface();
-            }
-        }, 15000);
-
-        // Listen for keyboard input
+        // Listen for keyboard input (Enter or Space to skip)
         document.addEventListener('keydown', (e) => {
             if (this.bootScreen.classList.contains('active') && 
                 (e.key === 'Enter' || e.key === ' ')) {
@@ -298,7 +368,7 @@ class MobileMenu {
     }
 }
 
-// Theme Controller
+// Theme Controller (simplified)
 class ThemeController {
     constructor() {
         this.currentTheme = 'default';
@@ -308,20 +378,10 @@ class ThemeController {
                 '--secondary-green': '#00aa2b',
                 '--text-primary': '#00ff41'
             },
-            amber: {
-                '--primary-green': '#ffb000',
-                '--secondary-green': '#cc8800',
-                '--text-primary': '#ffb000'
-            },
-            blue: {
-                '--primary-green': '#00aaff',
-                '--secondary-green': '#0088cc',
-                '--text-primary': '#00aaff'
-            },
-            red: {
-                '--primary-green': '#ff0040',
-                '--secondary-green': '#cc0020',
-                '--text-primary': '#ff0040'
+            professional: {
+                '--primary-green': '#4a9eff',
+                '--secondary-green': '#357abd',
+                '--text-primary': '#4a9eff'
             }
         };
     }
@@ -500,18 +560,15 @@ document.addEventListener('DOMContentLoaded', () => {
     app.init();
 });
 
-// Add some console art for developers who inspect the page
+// Professional console message
 console.log(`
- ____                    _            _                            
-/ ___|  __ _ _ __ ___    | | __ _  ___| | ____ _ _ __ ___   __ _ _ __  
-\\___ \\ / _\` | '_ \` _ \\   | |/ _\` |/ __| |/ / _\` | '_ \` _ \\ / _\` | '_ \\ 
- ___) | (_| | | | | | |  | | (_| | (__|   < (_| | | | | | | (_| | | | |
-|____/ \\__,_|_| |_| |_|  | |\\__,_|\\___|_|\\_\\__,_|_| |_| |_|\\__,_|_| |_|
-                        _/ |                                          
-                       |__/                                           
-
-Welcome to the matrix, fellow developer! 🚀
-Found something interesting? Let's connect!
+╔═══════════════════════════════════════╗
+║           Sam Jackaman                ║
+║       Full Stack Developer           ║
+║                                       ║
+║  Thanks for checking the console!     ║
+║  Let's build something amazing.       ║
+╚═══════════════════════════════════════╝
 `);
 
 // Easter egg for konami code

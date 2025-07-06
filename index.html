@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sam Jackaman - System Access</title>
+    <title>Sam Jackaman - Full Stack Developer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="commands-hint">
-                    <p>Type 'help' for available commands or click to enter</p>
+                    <p>Press Enter to continue or type 'help' for commands</p>
                 </div>
             </div>
         </div>
@@ -63,19 +63,28 @@
                 <div class="nav-section">
                     <h3>NAVIGATION</h3>
                     <ul>
-                        <li><a href="#about" data-section="about">01. whoami</a></li>
-                        <li><a href="#skills" data-section="skills">02. ls -la skills/</a></li>
-                        <li><a href="#projects" data-section="projects">03. cat projects.log</a></li>
-                        <li><a href="#contact" data-section="contact">04. send_message</a></li>
-                        <li><a href="#info" data-section="info">05. contact_info</a></li>
+                        <li><a href="#about" data-section="about">About Me</a></li>
+                        <li><a href="#skills" data-section="skills">Skills</a></li>
+                        <li><a href="#projects" data-section="projects">Projects</a></li>
+                        <li><a href="#contact" data-section="contact">Send Message</a></li>
+                        <li><a href="#info" data-section="info">Contact Info</a></li>
                     </ul>
                 </div>
                 
                 <div class="nav-section">
                     <h3>SYSTEM</h3>
                     <ul>
-                        <li><a href="#" onclick="location.reload()">reboot</a></li>
-                        <li><a href="#" onclick="toggleTheme()">theme --switch</a></li>
+                        <li><a href="#" onclick="location.reload()">Restart</a></li>
+                        <li><a href="#" onclick="toggleTheme()">Switch Theme</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>QUICK ACCESS</h3>
+                    <ul>
+                        <li><a href="mailto:sam@jackaman.dev">Email</a></li>
+                        <li><a href="https://linkedin.com/in/samjackaman" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://github.com/samjackaman" target="_blank">GitHub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -85,8 +94,8 @@
             <!-- About Section -->
             <section id="about" class="content-section active">
                 <div class="section-header">
-                    <h2>$ whoami</h2>
-                    <div class="section-path">~/user/profile/about.txt</div>
+                    <h2>About Me</h2>
+                    <div class="section-path">~/profile/about.json</div>
                 </div>
                 <div class="content-body">
                     <div class="file-content">
@@ -96,19 +105,20 @@
   "role": "Full Stack Developer",
   "location": "United Kingdom",
   "status": "Available for opportunities",
-  "passion": [
-    "Clean code architecture",
-    "Problem solving",
-    "Continuous learning",
-    "Building innovative solutions"
+  "specialties": [
+    "Web Application Development",
+    "System Architecture",
+    "Database Design",
+    "API Development"
   ],
-  "philosophy": "Code is poetry. Every line should have purpose.",
-  "current_focus": "Building scalable applications with modern technologies"
+  "philosophy": "Clean code is not just about making it work, it's about making it maintainable.",
+  "approach": "Problem-solving through elegant, scalable solutions"
 }
                         </pre>
                         <div class="text-content">
-                            <p>Welcome to my digital workspace. I'm a passionate developer who believes in the power of elegant code and innovative solutions.</p>
-                            <p>When I'm not crafting code, you'll find me exploring new technologies, contributing to open source projects, or diving deep into system architecture challenges.</p>
+                            <p>Hello! I'm Sam, a passionate full-stack developer with a love for creating efficient, scalable web applications. I believe in writing clean, maintainable code and staying up-to-date with the latest technologies.</p>
+                            <p>When I'm not coding, you'll find me exploring new frameworks, contributing to open source projects, or learning about emerging technologies in the software development space.</p>
+                            <p>I'm always excited to take on new challenges and collaborate with teams to build innovative solutions.</p>
                         </div>
                     </div>
                 </div>
@@ -117,16 +127,16 @@
             <!-- Skills Section -->
             <section id="skills" class="content-section">
                 <div class="section-header">
-                    <h2>$ ls -la skills/</h2>
-                    <div class="section-path">~/user/skills/</div>
+                    <h2>Technical Skills</h2>
+                    <div class="section-path">~/skills/</div>
                 </div>
                 <div class="content-body">
                     <div class="skills-grid">
                         <div class="skill-category">
-                            <h3>Frontend/</h3>
+                            <h3>Frontend Development</h3>
                             <div class="skill-list">
                                 <div class="skill-item">
-                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-name">JavaScript/TypeScript</span>
                                     <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
                                 </div>
                                 <div class="skill-item">
@@ -134,18 +144,18 @@
                                     <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
                                 </div>
                                 <div class="skill-item">
-                                    <span class="skill-name">TypeScript</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
-                                </div>
-                                <div class="skill-item">
                                     <span class="skill-name">CSS/SCSS</span>
                                     <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-name">Vue.js</span>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="skill-category">
-                            <h3>Backend/</h3>
+                            <h3>Backend Development</h3>
                             <div class="skill-list">
                                 <div class="skill-item">
                                     <span class="skill-name">Node.js</span>
@@ -167,7 +177,7 @@
                         </div>
                         
                         <div class="skill-category">
-                            <h3>DevOps/</h3>
+                            <h3>DevOps & Tools</h3>
                             <div class="skill-list">
                                 <div class="skill-item">
                                     <span class="skill-name">Docker</span>
@@ -194,47 +204,50 @@
             <!-- Projects Section -->
             <section id="projects" class="content-section">
                 <div class="section-header">
-                    <h2>$ cat projects.log</h2>
-                    <div class="section-path">~/user/projects/recent.log</div>
+                    <h2>Recent Projects</h2>
+                    <div class="section-path">~/projects/portfolio.log</div>
                 </div>
                 <div class="content-body">
                     <div class="projects-list">
                         <div class="project-item">
                             <div class="project-header">
-                                <h3>Portfolio Terminal</h3>
-                                <span class="project-status">active</span>
+                                <h3>Terminal Portfolio Website</h3>
+                                <span class="project-status active">Current</span>
                             </div>
-                            <p>Interactive terminal-based portfolio website with typewriter effects</p>
+                            <p>Interactive terminal-style portfolio with typewriter effects and responsive design. Built to showcase skills while providing an engaging user experience.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">JavaScript</span>
                                 <span class="tech-tag">CSS3</span>
                                 <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">Responsive Design</span>
                             </div>
                         </div>
                         
                         <div class="project-item">
                             <div class="project-header">
                                 <h3>E-Commerce Platform</h3>
-                                <span class="project-status">completed</span>
+                                <span class="project-status completed">Completed</span>
                             </div>
-                            <p>Full-stack e-commerce solution with payment integration</p>
+                            <p>Full-stack e-commerce solution with user authentication, payment processing, inventory management, and admin dashboard.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">React</span>
                                 <span class="tech-tag">Node.js</span>
                                 <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">Stripe API</span>
                             </div>
                         </div>
                         
                         <div class="project-item">
                             <div class="project-header">
-                                <h3>API Gateway</h3>
-                                <span class="project-status">development</span>
+                                <h3>Task Management System</h3>
+                                <span class="project-status development">In Progress</span>
                             </div>
-                            <p>Microservices API gateway with rate limiting and authentication</p>
+                            <p>Collaborative project management tool with real-time updates, file sharing, and team communication features.</p>
                             <div class="project-tech">
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">Docker</span>
-                                <span class="tech-tag">Redis</span>
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">Express.js</span>
+                                <span class="tech-tag">WebSocket</span>
+                                <span class="tech-tag">MongoDB</span>
                             </div>
                         </div>
                     </div>
@@ -244,34 +257,38 @@
             <!-- Contact Form Section -->
             <section id="contact" class="content-section">
                 <div class="section-header">
-                    <h2>$ send_message</h2>
-                    <div class="section-path">~/user/contact/message_form.sh</div>
+                    <h2>Send a Message</h2>
+                    <div class="section-path">~/contact/send_message.form</div>
                 </div>
                 <div class="content-body">
+                    <div class="contact-intro">
+                        <p>I'm always interested in new opportunities and collaborations. Feel free to reach out!</p>
+                    </div>
+                    
                     <form class="contact-form" id="contact-form">
                         <div class="form-group">
-                            <label for="name">sender_name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Your Name:</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">sender_email:</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email Address:</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">message_subject:</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" required placeholder="What's this about?">
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">message_body:</label>
-                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or opportunity..."></textarea>
                         </div>
                         
                         <button type="submit" class="submit-btn">
-                            <span class="btn-text">./send_message.sh</span>
-                            <span class="btn-loading">Transmitting...</span>
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading">Sending...</span>
                         </button>
                     </form>
                     
@@ -282,33 +299,40 @@
             <!-- Contact Info Section -->
             <section id="info" class="content-section">
                 <div class="section-header">
-                    <h2>$ contact_info</h2>
-                    <div class="section-path">~/user/contact/info.json</div>
+                    <h2>Contact Information</h2>
+                    <div class="section-path">~/contact/details.json</div>
                 </div>
                 <div class="content-body">
                     <div class="contact-info">
-                        <pre class="code-block">
-{
-  "contact": {
-    "email": "sam@jackaman.dev",
-    "linkedin": "linkedin.com/in/samjackaman",
-    "github": "github.com/samjackaman",
-    "location": "United Kingdom",
-    "timezone": "GMT/BST",
-    "availability": "Open to opportunities",
-    "response_time": "< 24 hours",
-    "preferred_contact": "email"
-  },
-  "social": {
-    "twitter": "@samjackaman",
-    "discord": "sam#1234"
-  },
-  "encryption": {
-    "pgp_key": "available_on_request",
-    "secure_messaging": "signal_available"
-  }
-}
-                        </pre>
+                        <div class="contact-grid">
+                            <div class="contact-item">
+                                <h3>Email</h3>
+                                <p><a href="mailto:sam@jackaman.dev">sam@jackaman.dev</a></p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <h3>Location</h3>
+                                <p>United Kingdom</p>
+                                <p>GMT/BST Timezone</p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <h3>Professional</h3>
+                                <p><a href="https://linkedin.com/in/samjackaman" target="_blank">LinkedIn Profile</a></p>
+                                <p><a href="https://github.com/samjackaman" target="_blank">GitHub Portfolio</a></p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <h3>Response Time</h3>
+                                <p>Usually within 24 hours</p>
+                                <p>Open to opportunities</p>
+                            </div>
+                        </div>
+                        
+                        <div class="additional-info">
+                            <h3>Let's Connect</h3>
+                            <p>I'm always excited to discuss new projects, innovative ideas, or potential collaborations. Whether you have a specific project in mind or just want to chat about technology, feel free to reach out!</p>
+                        </div>
                     </div>
                 </div>
             </section>
